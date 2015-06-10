@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>
+		Mobile Test Page
+	</title>
+	<script type="text/javascript" src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+</head>
+<body style="width:70%;margin:0 auto;text-align:center;padding:10px;">
+	<input type="text" Placeholder="enter name" id="suerbame"/> <br/><br/>
+	<button id="sendData">Send Data to server</button><br/><br/>
+	<h3>User Agent String</h3>
+	<div id="useragentstring"></div>
+
+</body>
+
+<script type="text/javascript">
+	
+var userString = navigator.userAgent;
+document.getElementById("useragentstring").innerHTML = userString;
+
+$("#sendData").on("click",function(){
+		$.ajax({
+			  method: "get",
+			  url: "/users",
+			  data: { name:$("#suerbame").val() , userstring:userString}
+			})
+		  .done(function( msg ) {
+		    alert( "Data Saved: " + msg );
+		  });
+})
+</script>
+</html>
